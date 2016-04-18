@@ -5,8 +5,8 @@ YEAR := $(shell date +%Y)
 
 
 
-.PHONY: stub
-stub: docs README.rst stub-license stub-setup
+.PHONY: stub 
+stub: docs README.rst tests stub-license stub-setup $(NAME)
 
 
 init:
@@ -54,3 +54,19 @@ ifdef NAME
 else
 	$(error define NAME=project)
 endif
+
+tests: name
+	mkdir tests
+	@echo "import os"  > tests/context.py
+	@echo "import sys" >> tests/context.py
+	@echo "sys.path.insert(0, os.path.abspath('..'))" >> tests/context.py
+	@echo "" >> tests/context.py
+	@echo "import $(NAME)" >> tests/context.py
+
+	@echo "from context import $(NAME)" > tests/tests_$(NAME).py
+	@echo "" >> tests/tests_$(NAME).py
+	@echo "def test_fail(): assert False, 'fail'" >> tests/tests_$(NAME).py
+
+$(NAME):
+	@mkdir $(NAME)
+	@touch $(NAME)/__init__.py
