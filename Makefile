@@ -5,18 +5,19 @@ YEAR := $(shell date +%Y)
 
 
 
-
-
-
-
-
-
-
-
-
-
 .PHONY: stub
 stub: docs README.rst stub-license stub-setup
+
+
+init:
+	pip3 install -r requirements.txt
+
+
+test:
+	nosetests
+
+
+
 
 .PHONY: stub-license
 stub-license:
