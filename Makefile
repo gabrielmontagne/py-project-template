@@ -5,10 +5,6 @@ YEAR := $(shell date +%Y)
 
 
 
-.PHONY: stub 
-stub: docs README.rst tests stub-license stub-setup $(NAME)
-
-
 init:
 	pip3 install -r requirements.txt
 
@@ -17,6 +13,8 @@ test:
 	nosetests
 
 
+.PHONY: stub 
+stub: docs README.rst tests stub-license stub-setup $(NAME)
 
 
 .PHONY: stub-license
