@@ -1,7 +1,3 @@
 *egg-info
 *.pyc
 __pycache__
-
-# temp
-docs
-tests
