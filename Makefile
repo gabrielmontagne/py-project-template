@@ -1,9 +1,15 @@
 VERSION := 0.0.1
 AUTHOR := Gabriel Montagné Láscaris-Comneno
 AUTHOR_EMAIL := gabriel@tibas.london
+YEAR := $(shell date +%Y)
 
 .PHONY: stub
-stub: docs README.rst
+stub: docs README.rst update-license
+
+.PHONY: update-license
+update-license:
+	@sed -i 's/\[+author+\]/$(AUTHOR) <$(AUTHOR_EMAIL)>/g' LICENSE
+	@sed -i 's/\[+year+\]/$(YEAR)/g' LICENSE
 
 docs:
 ifdef NAME
