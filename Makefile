@@ -63,7 +63,7 @@ tests: name
 
 	@echo "from context import $(NAME)" > tests/tests_$(NAME).py
 	@echo "" >> tests/tests_$(NAME).py
-	@echo "def test_fail(): assert False, 'fail'" >> tests/tests_$(NAME).py
+	@echo "def test_fail(): assert False, 'x_x'" >> tests/tests_$(NAME).py
 
 $(NAME):
 	@mkdir $(NAME)
