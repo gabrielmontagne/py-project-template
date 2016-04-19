@@ -16,7 +16,7 @@ lint:
 	@pylint $(NAME)
 
 .PHONY: stub
-stub: docs README.rst tests stub-license stub-setup $(NAME)
+stub: docs README.rst tests stub-license stub-setup $(NAME)/__main__.py
 
 .PHONY: stub-license
 stub-license:
@@ -65,6 +65,11 @@ tests: name
 	@echo "from context import $(NAME)" > tests/tests_$(NAME).py
 	@echo "" >> tests/tests_$(NAME).py
 	@echo "def test_fail(): assert False, 'x_x'" >> tests/tests_$(NAME).py
+
+$(NAME)/__main__.py: name $(NAME)
+	@echo we need $@
+	@echo "if __name__ == '__main__':" >> $@
+	@echo "    print('running module $(NAME)')" >> $@
 
 $(NAME):
 	@mkdir $(NAME)
