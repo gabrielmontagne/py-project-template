@@ -68,8 +68,10 @@ tests: name
 
 $(NAME)/__main__.py: name $(NAME)
 	@echo we need $@
-	@echo "if __name__ == '__main__':" >> $@
+	@echo "def main():" >> $@
 	@echo "    print('running module $(NAME)')" >> $@
+	@echo "if __name__ == '__main__':" >> $@
+	@echo "    main()" >> $@
 
 $(NAME):
 	@mkdir $(NAME)

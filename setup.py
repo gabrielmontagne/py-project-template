@@ -5,5 +5,10 @@ setup(
     author='[+author+]',
     author_email='[+email+]',
     license='MIT',
-    version='[+version+]'
+    version='[+version+]',
+    entry_points={
+        'console_scripts': [
+            '[+name+] = [+name+].__main__:main'
+        ]
+    }
 )
