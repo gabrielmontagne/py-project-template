@@ -76,3 +76,8 @@ $(NAME)/__main__.py: name $(NAME)
 $(NAME):
 	@mkdir $(NAME)
 	@touch $(NAME)/__init__.py
+
+.PHONY: create-remote-repo
+create-remote-repo:
+	hub -p create $(NAME)
+	git push --set-upstream origin master
