@@ -16,7 +16,7 @@ lint:
 	@pylint $(NAME)
 
 .PHONY: stub
-stub: docs README.rst tests stub-license stub-setup $(NAME)/__main__.py
+stub: README.adoc tests stub-license stub-setup $(NAME)/__main__.py
 
 .PHONY: stub-license
 stub-license:
@@ -30,21 +30,10 @@ stub-setup: name
 	@sed -i 's/\[+email+\]/$(AUTHOR_EMAIL)/g' setup.py
 	@sed -i 's/\[+version+\]/$(VERSION)/g' setup.py
 
-docs: name
-	sphinx-quickstart \
-		-p "$(NAME)" \
-		-v $(VERSION) \
-		--makefile \
-		--batchfile \
-		-r $(VERSION) \
-		-a "$(AUTHOR)" \
-		docs
-
-README.rst: name
-	@echo $(NAME) > README.rst
-	@echo "=======================================" >> README.rst
-	@echo ":version:$(VERSION)" >> README.rst
-	@echo ":author:$(AUTHOR) $(AUTHOR_EMAIL)" >> README.rst
+README.adoc: name
+	@echo "= $(NAME)" > README.adoc
+	@echo "$(AUTHOR) <$(AUTHOR_EMAIL)>" >> README.adoc
+	@echo "v$(VERSION)" >> README.adoc
 
 .PHONY: name
 name:
