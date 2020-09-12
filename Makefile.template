@@ -1,0 +1,14 @@
+NAME := [+name+]
+VERSION := [+version+]
+
+init:
+	pip3 install -r requirements.txt
+
+test:
+	nosetests
+
+lint:
+	@echo '---PEP8---'
+	@pep8 -v $(NAME)
+	@echo '---pylint---'
+	@pylint $(NAME)

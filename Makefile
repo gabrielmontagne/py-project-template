@@ -3,20 +3,8 @@ AUTHOR := Gabriel Montagné Láscaris-Comneno
 AUTHOR_EMAIL := gabriel@tibas.london
 YEAR := $(shell date +%Y)
 
-init:
-	pip3 install -r requirements.txt
-
-test:
-	nosetests
-
-lint:
-	@echo '---PEP8---'
-	@pep8 -v $(NAME)
-	@echo '---pylint---'
-	@pylint $(NAME)
-
 .PHONY: stub
-stub: README.adoc tests stub-license stub-setup $(NAME)/__main__.py
+stub: README.adoc tests stub-license stub-setup clean-makefile $(NAME)/__main__.py
 
 .PHONY: stub-license
 stub-license:
@@ -29,6 +17,12 @@ stub-setup: name
 	@sed -i 's/\[+name+\]/$(NAME)/g' setup.py
 	@sed -i 's/\[+email+\]/$(AUTHOR_EMAIL)/g' setup.py
 	@sed -i 's/\[+version+\]/$(VERSION)/g' setup.py
+
+.PHONY: clean-makefile
+clean-makefile:
+	@sed -i 's/\[+name+\]/$(NAME)/g' Makefile.template
+	@sed -i 's/\[+version+\]/$(VERSION)/g' Makefile.template
+	@cp Makefile.template Makefile
 
 README.adoc: name
 	@echo "= $(NAME)" > README.adoc
@@ -65,8 +59,3 @@ $(NAME)/__main__.py: name $(NAME)
 $(NAME):
 	@mkdir $(NAME)
 	@touch $(NAME)/__init__.py
-
-.PHONY: create-remote-repo
-create-remote-repo:
-	hub -p create $(NAME)
-	git push --set-upstream origin master
