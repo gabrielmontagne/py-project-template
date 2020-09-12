@@ -22,7 +22,7 @@ stub-setup: name
 clean-makefile:
 	@sed -i 's/\[+name+\]/$(NAME)/g' Makefile.template
 	@sed -i 's/\[+version+\]/$(VERSION)/g' Makefile.template
-	@cp Makefile.template Makefile
+	@mv Makefile.template Makefile
 
 README.adoc: name
 	@echo "= $(NAME)" > README.adoc
